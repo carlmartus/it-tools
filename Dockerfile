@@ -1,8 +1,10 @@
 # build stage
 FROM node:lts-alpine AS build-stage
 # Set environment variables for non-interactive npm installs
+ARG BASE_URL
 ENV NPM_CONFIG_LOGLEVEL warn
 ENV CI true
+ENV BASE_URL=$BASE_URL
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm && pnpm i --frozen-lockfile
